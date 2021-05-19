@@ -71,7 +71,12 @@ class MyWindow(QMainWindow, form_class):
             QMessageBox.warning(self, self.tr("Attention"), "Checked", QMessageBox.Yes)
 
 
-app = QApplication(sys.argv)
-window = MyWindow()
-window.show()
-app.exec_()
+def main():
+    app = QApplication(sys.argv)
+    window = MyWindow()
+    window.show()
+    app.exec_()
+
+
+if __name__ == "__main__":
+    main()
