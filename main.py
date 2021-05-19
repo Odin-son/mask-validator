@@ -15,6 +15,7 @@ class MyWindow(QMainWindow, form_class):
         self.setupUi(self)
         self.setWindowTitle('mask validator')
         self.import_btn.clicked.connect(self.import_clicked)
+        self.progressBar.setVisible(False)
 
         self.color_map = [(0, 0, 0),
                           (0, 0, 255),
@@ -46,7 +47,10 @@ class MyWindow(QMainWindow, form_class):
         imgs_path = glob(os.path.join(self.label.text(), '*{}'.format('.png')))
 
         have_problem = False
-        for img_path in imgs_path:
+        self.progressBar.setVisible(True)
+        self.progressBar.setMaximum(len(imgs_path))
+
+        for step, img_path in enumerate(imgs_path):
             img = cv2.imread(img_path)
 
             result = img.copy()
@@ -64,6 +68,8 @@ class MyWindow(QMainWindow, form_class):
                                         '{}_problem.png'.format(os.path.basename(img_path).split('.')[0]))
 
                 cv2.imwrite(out_path, result)
+
+            self.progressBar.setValue(step+1)
 
         if have_problem:
             QMessageBox.warning(self, self.tr("Attention"), "There are some problem", QMessageBox.Yes)
