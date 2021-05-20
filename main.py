@@ -3,6 +3,7 @@ import os
 import cv2
 import os.path as osp
 
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from glob import glob
@@ -16,6 +17,7 @@ class MyWindow(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle('mask validator')
+        self.setWindowIcon(QIcon(osp.join(PROJ_DIR, 'mask_validator.png')))
         self.import_btn.clicked.connect(self.import_clicked)
         self.progressBar.setVisible(False)
 
