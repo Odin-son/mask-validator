@@ -1,12 +1,14 @@
 import sys
 import os
 import cv2
+import os.path as osp
 
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from glob import glob
 
-form_class = uic.loadUiType("main.ui")[0]
+PROJ_DIR = osp.dirname(osp.abspath(__file__))
+form_class = uic.loadUiType(osp.join(PROJ_DIR, 'main.ui'))[0]
 
 
 class MyWindow(QMainWindow, form_class):
